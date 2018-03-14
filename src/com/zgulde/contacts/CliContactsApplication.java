@@ -3,6 +3,11 @@ package com.zgulde.contacts;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class to provide the command line interface to the contacts
+ * application. This class handles all of the user interactions, but relies on
+ * the ContactsDao to provide any functionality for modifying contacts.
+ */
 public class CliContactsApplication {
     private final Scanner scanner;
     private final ContactsDao dao;

@@ -5,6 +5,10 @@ import com.zgulde.util.FileHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of the ContactsDao that reads and writes contacts
+ * to a text file.
+ */
 public class ContactsFromFile implements ContactsDao {
     private static final String contactsFile = "contacts.txt";
 
