@@ -4,49 +4,27 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * A class to provide the command line interface to the contacts
+ * A class to provide the control flow for the command line interface to the contacts
  * application. This class handles all of the user interactions, but relies on
- * the ContactsDao to provide any functionality for modifying contacts.
+ * the ContactsDao to provide any functionality for modifying contacts, and
+ * the TerminalDisplay class to show formatted information to the user.
  */
 public class CliContactsApplication {
     private final Scanner scanner;
     private final ContactsDao dao;
-    private final String contactsFormat;
 
     public CliContactsApplication() {
-        contactsFormat = "| %-10s | %10s |\n";
         dao = new ContactsFromFile();
         scanner = new Scanner(System.in);
     }
 
-    private void showContacts(List<Contact> contacts) {
-        if (contacts.isEmpty()) {
-            System.out.println("No Contacts Found.");
-            return;
-        }
-        System.out.printf(this.contactsFormat, "Name", "Number");
-        System.out.printf(this.contactsFormat, "---------", "--------");
-        for (Contact contact : contacts) {
-            System.out.printf(this.contactsFormat, contact.getName(), contact.getNumber());
-        }
-    }
-
     public void start() {
-        System.out.println("Welcome!");
-        System.out.println("");
+        TerminalDisplay.welcome();
         showMenu();
     }
 
     private void showMenu() {
-        System.out.println("");
-        System.out.println("0 - Exit");
-        System.out.println("1 - View Contacts");
-        System.out.println("2 - Add A Contact");
-        System.out.println("3 - Search Contacts");
-        System.out.println("4 - Remove A Contact");
-        System.out.println();
-        System.out.print("Your choice? ");
-
+        TerminalDisplay.showMenu();
         String choice = scanner.nextLine();
 
         switch(choice) {
@@ -66,7 +44,7 @@ public class CliContactsApplication {
                 removeContact();
                 break;
             default:
-                System.out.println("\nError: Unknown Option: " + choice);
+                TerminalDisplay.error("Unknown Option: " + choice);
                 showMenu();
                 return;
         }
@@ -93,7 +71,7 @@ public class CliContactsApplication {
         System.out.print("Search Term? ");
         String searchTerm = scanner.nextLine();
         List<Contact> results = dao.search(searchTerm);
-        showContacts(results);
+        TerminalDisplay.showContacts(results);
     }
 
     private void addContact() {
@@ -107,11 +85,11 @@ public class CliContactsApplication {
     }
 
     private void viewAllContacts() {
-        showContacts(dao.all());
+        TerminalDisplay.showContacts(dao.all());
     }
 
     private void exit() {
-        System.out.println("Have a Great Day!");
+        TerminalDisplay.goodbye();
         System.exit(0);
     }
 }
