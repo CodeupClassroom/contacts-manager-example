@@ -8,11 +8,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a simple class that provides two static methods to help with file io:
+ *
+ * - slurp: to read the contents of a file
+ * - spit: to write to a file
+ */
 public class FileHelper {
-
-    public static void main(String[] args) throws IOException {
-//        makeExciting("src/util/FileHelper.java");
-    }
 
     public static List<String> slurp(String filepath) {
         Path path = Paths.get(filepath);
@@ -59,20 +61,4 @@ public class FileHelper {
         }
     }
 
-    /**
-     * Here we can just re-use our slurp and spit methods so we don't have to
-     * write all the boilerplate associated with paths and exception handling.
-     * I saw a lot of students duplicating code to open files instead of
-     * using the methods they just defined.
-     */
-    public static void makeExciting(String filename) {
-        List<String> excitedLines = new ArrayList<>();
-
-        for(String line : slurp(filename)) {
-            String excitedLine = line.toUpperCase() + "!";
-            excitedLines.add(excitedLine);
-        }
-
-        spit(filename, excitedLines);
-    }
 }
