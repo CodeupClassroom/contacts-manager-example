@@ -13,9 +13,9 @@ public class CliContactsApplication {
     private final Scanner scanner;
     private final ContactsDao dao;
 
-    public CliContactsApplication() {
-        dao = new ContactsFromFile();
-        scanner = new Scanner(System.in);
+    public CliContactsApplication(Scanner scanner, ContactsDao dao) {
+        this.scanner = scanner;
+        this.dao = dao;
     }
 
     public void start() {
