@@ -14,3 +14,9 @@ run the code locally), then answer the following questions:
 
 - What is the benefit of using the `ContactsDao` interface?
 
+- What changes would you need to make to the application in order to add the
+  following features?
+
+    - A menu option that, when selected, displays a random contact
+    - A different format for phone numbers
+    - Instead of writing to a file, read and write contacts to a database
